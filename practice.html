@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<title>d3.js</title>
+</head>
+<body>
+
+	<!-- <p>paragraph 1</p>
+	<p>paragraph 2</p>
+	<p>paragraph 3</p> -->
+	
+    <!-- html中的元素，標籤裡包含著標籤 -->
+	<!-- <p> This <span>is</span> a paragraph </p> -->
+
+    <!-- body 中的三個段落元素 -->
+	<!-- <p>Car</p>
+	<p id="plane">Plane</p>
+	<p>ship</p> -->
+
+    <!-- body 中的三個段落元素 -->
+   <!--  <p>fire</p>
+    <p>water</p>
+    <p>wind</p> -->
+    
+    <!-- body 中的三個段落元素 -->
+   <!--  <p>lion</p>
+    <p>tiger</p>
+    <p>leopard</p> -->
+
+    <!-- <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p> -->
+
+    <p>3</p>
+    <p>6</p>
+    <p>9</p>
+
+	<script>
+		//------- d3.js入門 --------------------------//
+		//------- select&selectAll -------------------//
+		//select傳回比對選擇器的第一個元素
+		d3.select("body");//選擇body元素
+		// d3.select("#important"); //選擇id為important的元素
+		// d3.select(".content"); //選擇類別為content的第一個元素
+
+		//selectAll傳回比對選擇器的所有元素
+		//d3.selectAll("p");//選擇所有的p元素
+		// d3.selectAll(",content"); //選擇類別為content的所有元素
+		// d3.selectAll("ul li"); //選擇 ul 中所有的li元素
+
+		//select跟selectAll的參數 除了CSS選擇器也可以是已經被DOM API選擇的元素
+		// var important = document.getElementById("important");
+		// d3.select(important);
+
+		//選擇body中所有的p元素
+		// d3.select("body").selectAll("p");
+		
+		//------empty/node/size------------------------//
+		// var paragraphs = d3.selectAll("p");
+
+	 //    //empty:選擇集為空，傳回true;反之false
+	 //    console.log(paragraphs.empty()); //false
+	    
+	 //    //node:傳回第一個不可為空元素，若選擇集為空，傳回null
+	 //    console.log(paragraphs.node()); //<p> paragraph 1</P>
+	    
+	 //    //size傳回選擇集的元素個數
+	 //    console.log(paragraphs.size()); //3
+	    
+	    //-------attr/classed/style/property/text/html----//
+	    //------------svg畫圖預備----------//
+	 // 	var width = 800; //svg繪製區域寬度
+		// var height = 600; //svg繪製區域長度
+		// var svg = d3.select("body") //選擇body
+		// .append("svg") //在body中增加svg
+		// .attr("width", width) //設定svg寬度屬性
+		// .attr("height", height);
+  //       // .attr('') //設定svg長度屬性
+  //       var cx ='50px';
+  //       var cy ='50px';
+
+		// // selection.attr(name[,value])
+	 //    svg.append("circle") //在<SVG>中增加<circle>標籤
+	 //       .attr("cx",cx) //設定屬性cx的值為50px
+	 //       .attr("cy",cy) //設定屬性cy的值為50px 
+	 //       .attr("r","50px") //設定屬性r的值為50px 	
+	 //       .attr("fill","red"); //設定屬性fill的值為red
+
+	 //    //如果要取得選擇集某屬性的值，則省略第二個參數value
+	 //    var cx = d3.select("circle").attr("cx");
+	 //    console.log(cx); //50px
+
+	    //selection.classed(name[,value])
+	    //設定或取得選擇集的css類別，name是類別名，value是一個布林值
+	    // d3.select("p")
+     //      .classed("red",true)//開啟red類別
+	    //   .classed("bigsize",false);//不開啟bigsize類別
+	    
+	    //classed還有以下形式
+	    // d3.select("p")
+	    //   .classed({"red":true,"bigsize":true}); //寫在一個物件裡
+	    // d3.select("p") 
+	    //   .classed("red bigsize",true); //用空格分開寫在一起
+        
+        //selection.style(name[,value[,priority]])
+        //設定或取得選擇集的樣式，name是樣式名，value是樣式值
+        // 新增<p>的style
+        // d3.select("p")
+        //   .style("color","red")
+        //   .style("font-size","30px");
+
+        //利用物件形式將幾個樣式寫在一起
+        //d3.select("p")
+        //  .style({"color":"red","font-size":"30px"});
+
+        //selection.property(name[,value])
+        // d3.select("#fname").property("value");
+        // d3.select("#fname").property("value","LiSi");
+
+        //selection.text([value])
+        //選擇p後 呼叫text()函數 將傳回值在主控台中輸出
+        //console.log(d3.select("p").text()); //輸出為this is a paragraph，不包含span標籤
+
+        //selection.html([value])
+        //設定取得選擇集內部html內容＝DOM的innerHTML
+        //console.log(d3.select("p").html());
+
+        //-------append/insert/remove---------------//
+        //選擇body元素
+        // var body = d3.select("body");
+
+        // //在body中所有元素的尾端處增加一個p元素 內容為train
+        // body.append("p").text("Train"); //car plane ship train
+
+        // //在body中id為plane的元素前增加一個p元素 內容為Bike
+        // body.insert("p","#plane").text("Bike"); //car bike plane ship train
+
+        //選擇id為plane的元素
+        // var plane = d3.select("#plane"); 
+        //刪除id為plane的元素
+        //plane.remove();//car bike ship train
+    
+    	//--------data/datum------------------//
+    	//datum()的工作過程
+        //選擇body中所有的p元素，選擇及結果值設定給變數p
+        // var p = d3.select("body").selectAll("p");
+        // //綁定數值7到選擇即上
+        // p.datum(7);
+        // //在主控台輸出選擇集
+        // // 會在標籤裡面增加一個__data__屬性顯示被綁定的數字
+        // console.log(p);
+
+        // //沒有參數的情形
+        // // 直接傳回__data__的屬性值
+        // var p = d3.select("body").selectAll("p");
+        // p.datum(7);
+        // console.log(p.datum()); //在主控台輸出被綁定的資料
+
+        //用被綁定的字串，取代掉段落原來的字串
+        // var p = d3.select("body").selectAll("p");
+        // p.datum("Thunder")
+        //   .text(function(d,i){ //綁定字串thunder到選擇集上
+        //   	return d+ " " + i;  //取代內容
+        //   });
+
+        //能使被綁定的資料傳遞給子元素
+        // var p = d3.select("body").selectAll("p")
+        // p.datum("Thunder")
+        //   .append("span")       //在每一個被選擇元素後增加元素span
+        //   .text(function(d,i){  //綁定字串thunder到選擇集上
+        //   	return d+ " " + i;  //取代內容
+        //   });
+        
+        //data()的工作過程
+        //定義陣列
+        // var dataset =[3,6,9];
+
+        // //選擇body中的p元素
+        // var p = d3.select("body").selectAll("p");
+
+        // //綁定資料到選擇集
+        // var update = p.data(dataset);
+
+        // //輸出綁定的結果
+        // console.log(update);
+
+        //-----enter/update/exit-------------//
+        //update修改attr屬性 enter給選擇集append足夠的元素 exit刪除多餘的元素
+        
+        //enter代表沒有足夠元素->增加元素
+       //  var dataset = [3,6,9];
+       //  var p = d3.select("body").selectAll("p");
+
+      	// //綁定資料後，分別取得update跟enter部分
+      	// var update = p.data(dataset);
+      	// var enter =update.enter();
+
+      	//update部分的處理方法是直接修改內容
+      	// update.text(function(d){return d;});
+
+      	//enter部分的處理方法是增加元素後再修改內容
+      	// enter.append("p").text(function(d){return d;});
+
+      	//假設body裡沒有p元素 希望透過一個陣列 按陣列長度補足P
+      	// var dataset =[10,20,30,40,50];
+      	// var body = d3.select("body");
+      	// body.selectAll("p")  //選擇body中的所有p但沒有p所以選擇一個空集
+       //    	.data(dataset)   //綁定dataset陣列
+       //    	.enter()         //傳回enter部分
+       //    	.append("p")     //增加p元素
+          	//.text(function(d){return d;});
+
+        //存在多餘的元素 沒有對應的資料 需刪除元素
+       //  var dataset = [10,20,30];
+      	// var p = d3.select("body").selectAll("p");
+      	// //綁定資料 分別取得update跟exit
+      	// var update = p.data(dataset);
+      	// var exit = update.exit();
+      	// //update部分是修改內容
+      	// update.text(function(d){return d;});
+      	// //exit部分處理方法是刪除
+      	// exit.remove();
+
+      	//以下是若在不知道新資料長度情況下更新圖形
+      // 	var dataset = [10,20,30];
+      // 	var p = d3.select("body").selectAll("p");
+      // 	// 綁定資料後分別回傳update enter exit部分
+      // 	var update = p.data(dataset);
+      // 	var enter = update.enter();
+      // 	var exit = update.exit();
+
+      // 	// 1.update部分處理方法
+      // 	update.text(function(d){return d;});
+
+      // 	// 2.enter部分處理方法
+      // 	enter.append("p")
+      // 		.text(function(d) {return d;});
+
+     	// // 3.exit部分的處理方法
+      // 	exit.remove(); 
+
+
+		//--------------基本Force Layout圖形-----------------//
+		//建立100個物件餵給Force layout
+		// var nodes = [];
+		// for(var i = 0; i < 10; i ++ ) nodes.push({idx: i});
+
+		// //準備畫圖的地方
+		// var width = 800; //svg繪製區域寬度
+		// var height = 600; //svg繪製區域長度
+		// var svg = d3.select("body") //選擇body
+		// .append("svg") //在body中增加svg
+		// .attr("width", width)//設定svg寬度屬性
+		// .attr("height", height);//設定svg長度屬性
+		
+		// //利用這100個物件建立對應的svg標籤
+		// var circles = d3.select("svg") 
+		// .selectAll('circle')//選擇所有的circle標籤
+		// .data(nodes) //資料讀取
+		// .enter() 
+		// .append("circle"); //新增cirlce標籤
+
+
+		// //建立Force Layout
+		// //it.x由Force Layout提供
+		// //it.y由Force Layout提供
+		// function tick(){ //tick會不斷被呼叫
+		// 	circles.attr({
+		// 		cx : function(it){ return it.x },
+		// 		cy : function(it){ return it.y },
+		// 		r : 5,
+		// 	});
+		// }
+		
+
+
+		// var force = d3.layout.force() //建立資料
+		// .nodes(nodes) //綁定資料
+		// .size([800, 600]) //設定範圍
+		// .on("tick",tick) //設定tick函式
+		// .start(); //啟動
+
+		//--------------進階Force Layout圖形-----------------//
+		//大小不一樣
+		//點點顏色改變
+		// var nodes = [];
+		// for (var i = 0; i < 100; i++) nodes.push({
+		// 	idx: i, 
+		// 	r: parseInt(Math.random()*10 + 2) // 半徑範圍: 2 ~ 12
+		// });
+
+		// //準備畫圖的地方
+		// var width = 800; //svg繪製區域寬度
+		// var height = 600; //svg繪製區域長度
+		// var svg = d3.select("body") //選擇body
+		// .append("svg") //在body中增加svg
+		// .attr("width", width) //設定svg寬度屬性
+		// .attr("height", height); //設定svg長度屬性
+		
+		// //利用這100個物件建立對應的svg標籤
+		// var circles = d3.select("svg") 
+		// .selectAll("circle")
+		// .data(nodes)
+		// .enter()
+		// .append("circle");
+
+		// //建立Force Layout
+		// //it.x由Force Layout提供
+		// //it.y由Force Layout提供
+		// var color = d3.scale.linear().domain([2,15]).range(["#090","#f00"]);
+		// function tick() {
+		// 	circles.attr({
+		// 		cx : function(it){ return it.x },
+		// 		cy : function(it){ return it.y },
+		// 		r: function(it) { return it.r; },
+		// 		fill: function(it) { return color(it.r); }
+		// 	});
+		// }
+
+		// var force = d3.layout.force() //建立資料
+		// .nodes(nodes) //綁定資料
+		// .size([800, 600]) //設定範圍
+		// .on("tick",tick) //設定tick函式
+		// .start(); //啟動
+		
+		//---------------------泡泡圖----------------------//
+		// 準備畫圖的地方
+		var width = 800; //svg繪製區域寬度
+		var height = 600; //svg繪製區域長度
+		var svg = d3.select("body") //選擇body
+		.append("svg") //在body中增加svg
+		.attr("width", width) //設定svg寬度屬性
+		.attr("height", height); //設定svg長度屬性
+		
+		d3.csv("population.csv", function(data){
+			var pack = d3.layout.pack();
+			pack = pack.padding(2).size([800,600]);
+			var nodes = pack.nodes(dataobj);
+			nodes = nodes.filter(function(it) { return it.parent; });
+			var color = d3.scale.category20();
+
+			d3.select("svg")
+			.selectAll("circle")
+			.data(nodes)
+			.enter()
+			.append("circle")
+			.attr({
+			cx: function(it) { return it.x; }, 
+			cy: function(it) { return it.y; },
+			r : function(it) { return it.r; },
+			fill: function(it) { return color(it.country); },
+			// fill: "#ccc",
+			stroke: "#444",
+		});
+
+			d3.select("svg").selectAll("text")
+			.data(nodes)
+			.enter()
+			.append("text")
+			.attr({
+				x: function(it) { return it.x; },
+				y: function(it) { return it.y; },
+				"text-anchor": "middle",                    // 文字水平置中
+				})
+			.text(function(it) { return it.country; }); // 設定文字為國名
+		})
+
+	</script>
+
+</body>
+</html>
